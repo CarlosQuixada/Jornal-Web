@@ -46,16 +46,7 @@ public class LoginController {
 	@RequestMapping("/login")
 	public String login(HttpSession session, Usuario usu,Model model) {
 		List<Noticia> noticias = nDAO.listarNoticia();
-		
-		for(Noticia n : nDAO.listarNoticia()){
-			System.out.println(n.getTitulo_noticia());
-			System.out.println(n.getSubtitulo_noticia());
-			System.out.println(n.getJornalista().getNome_usuario());
-			System.out.println(n.getSecao().getTitulo_secao());
-			System.out.println(n.getTexto_noticia());
 			
-		}
-	
 		Usuario ref = uDAO.recuperarUsuario(usu.getLogin());
 		String senha_crip = seguranca.criptografar(usu.getSenha());
 		usu.setSenha(senha_crip);
