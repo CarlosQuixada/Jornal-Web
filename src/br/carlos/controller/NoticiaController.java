@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.carlos.dao.ComentarioDAO;
 import br.carlos.dao.NoticiaDAO;
 import br.carlos.dao.SecaoDAO;
 import br.carlos.dao.UsuarioDAO;
+import br.carlos.model.Comentario;
 import br.carlos.model.Noticia;
 import br.carlos.model.Secao;
 import br.carlos.model.Usuario;
@@ -31,6 +33,10 @@ public class NoticiaController {
 	@Autowired
 	@Qualifier("secaoDAO")
 	private SecaoDAO sDAO;
+	
+	@Autowired
+	@Qualifier("comentarioDAO")
+	private ComentarioDAO cDAO;
 	
 	@RequestMapping("/cadastrarNoticiaFormulario")
 	public String cadastrarNoticiaFormulario(Long id_secao,Model model){
@@ -58,4 +64,20 @@ public class NoticiaController {
 		}
 		return "redirect:paginaPrincipal";
 	}
+	
+	@RequestMapping("/inserirComentario")
+	public String inserirComentario(Comentario comentario,Model model){
+		Usuario usu = uDAO.recuperarUsuario(comentario.getId_usuario());
+		Noticia not = nDAO.recuperarNoticia(comentario.getId_noticia());
+		
+		comentario.setUsuario(usu);
+		comentario.setNoticia(not);
+		
+		model.addAttribute("noticia",not);
+		
+		cDAO.inserirComentario(comentario);
+		return"noticia/mostrarNoticia";
+	}
+	
+	
 }

@@ -47,7 +47,6 @@ public class LoginController {
 	public String login(HttpSession session, Usuario usu,Model model) {
 		List<Noticia> noticias = nDAO.listarNoticia();
 			
-		
 		Usuario ref = uDAO.recuperarUsuario(usu.getLogin());
 		String senha_crip = seguranca.criptografar(usu.getSenha());
 		usu.setSenha(senha_crip);

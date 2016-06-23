@@ -22,6 +22,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<bean id="papelDAO" class="br.carlos.dao.PapelDAO" />
 	<bean id="noticiaDAO" class="br.carlos.dao.NoticiaDAO"/>
 	<bean id="secaoDAO" class="br.carlos.dao.SecaoDAO"/>
+	<bean id="comentarioDAO" class="br.carlos.dao.ComentarioDAO" />
 	<bean id="seguranca" class="br.carlos.security.Seguranca" />
 
 	<bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource">
