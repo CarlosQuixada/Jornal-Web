@@ -1,5 +1,7 @@
 package br.carlos.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -37,10 +39,13 @@ public class ComentarioController {
 		
 		comentario.setUsuario(usu);
 		comentario.setNoticia(not);
+		cDAO.inserirComentario(comentario);
+		
+		List<Comentario>comentarios = cDAO.listarComentario(comentario.getId_noticia());
 		
 		model.addAttribute("noticia",not);
-		
-		cDAO.inserirComentario(comentario);
+		model.addAttribute("comentarios",comentarios);
+	
 		return"noticia/mostrarNoticia";
 	}
 }

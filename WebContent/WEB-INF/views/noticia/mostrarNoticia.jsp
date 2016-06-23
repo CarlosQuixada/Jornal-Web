@@ -1,3 +1,4 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -21,5 +22,11 @@
 			Texto:<br/><textarea rows="4" cols="50" name="texto_comentario"></textarea><br/><br/>
 			<input type="submit" value="Comentar" />
 		</form>
+		<c:forEach var="comentario" items="${comentarios}">
+			<hr  width="60%" align="left"/><br/>
+			<h4>${comentario.usuario.nome_usuario}</h4>
+			<p>${comentario.texto_comentario}</p>
+			<hr  width="60%" align="left"/><br/>
+		</c:forEach>
 </body>
 </html>

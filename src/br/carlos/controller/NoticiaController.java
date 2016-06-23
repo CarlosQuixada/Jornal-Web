@@ -1,5 +1,7 @@
 package br.carlos.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -8,9 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import br.carlos.dao.ComentarioDAO;
 import br.carlos.dao.NoticiaDAO;
 import br.carlos.dao.SecaoDAO;
 import br.carlos.dao.UsuarioDAO;
+import br.carlos.model.Comentario;
 import br.carlos.model.Noticia;
 import br.carlos.model.Secao;
 import br.carlos.model.Usuario;
@@ -30,6 +34,10 @@ public class NoticiaController {
 	@Autowired
 	@Qualifier("secaoDAO")
 	private SecaoDAO sDAO;
+	
+	@Autowired
+	@Qualifier("comentarioDAO")
+	private ComentarioDAO cDAO;
 	
 	@RequestMapping("/cadastrarNoticiaFormulario")
 	public String cadastrarNoticiaFormulario(Long id_secao,Model model){
@@ -51,7 +59,9 @@ public class NoticiaController {
 	public String mostrarNoticia(Long id_noticia,Model model){
 		for(Noticia n : nDAO.listarNoticia()){
 			if(n.getId_noticia().equals(id_noticia)){
+				List<Comentario>comentarios = cDAO.listarComentario(id_noticia);
 				model.addAttribute("noticia",n);
+				model.addAttribute("comentarios",comentarios);
 				return "noticia/mostrarNoticia";
 			}
 		}
