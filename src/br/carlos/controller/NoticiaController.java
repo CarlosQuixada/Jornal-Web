@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import br.carlos.dao.NoticiaDAO;
 import br.carlos.dao.SecaoDAO;
@@ -57,5 +56,5 @@ public class NoticiaController {
 			}
 		}
 		return "redirect:paginaPrincipal";
-	}
+	}	
 }
