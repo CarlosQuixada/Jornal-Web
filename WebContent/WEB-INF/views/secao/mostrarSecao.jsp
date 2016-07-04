@@ -14,13 +14,12 @@
 		<tr>
 			<td>Seção</td>
 		</tr>
-		
+		<c:forEach var="secao" items="${secoes}">
 		<tr>
-			<c:forEach var="secao" items="${secoes}">
-				<td>${secao.titulo_secao} - ${secao.id_secao}</td>
-				<td><a href="cadastrarNoticiaFormulario?id_secao=${secao.id_secao}">Cadastrar Noticia</a>		
-			</c:forEach>
+			<td>${secao.titulo_secao} - ${secao.id_secao}</td>
+			<td><a href="cadastrarNoticiaFormulario?id_secao=${secao.id_secao}">Cadastrar Noticia</a>		
 		</tr>
+		</c:forEach>
 	</table>
 </body>
 </html>

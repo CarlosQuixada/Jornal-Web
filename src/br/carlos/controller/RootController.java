@@ -12,6 +12,6 @@ public class RootController {
 	
 	@RequestMapping("/home")
 	public String home2(){
-		return"home";
+		return"paginaPrincipal";
 	}
 }
