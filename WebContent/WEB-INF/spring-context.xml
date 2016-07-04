@@ -23,6 +23,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<bean id="noticiaDAO" class="br.carlos.dao.NoticiaDAO"/>
 	<bean id="secaoDAO" class="br.carlos.dao.SecaoDAO"/>
 	<bean id="comentarioDAO" class="br.carlos.dao.ComentarioDAO" />
+	<bean id="classificadoDAO" class="br.carlos.dao.ClassificadoDAO"/>
 	<bean id="seguranca" class="br.carlos.security.Seguranca" />
 
 	<bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource">
