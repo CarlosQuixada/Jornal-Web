@@ -38,4 +38,12 @@ public class ClassificadoController {
 		clDAO.inserirClassificado(clas);
 		return"paginaPrincipal";
 	}
+	
+	@RequestMapping("/mostrarClassificado")
+	public String mostrarClassificado(Model model){
+		List<Classificado> classificados = clDAO.listarClassificado();
+		model.addAttribute("classificados",classificados);
+		
+		return"classificado/mostrarClassificado";
+	}
 }

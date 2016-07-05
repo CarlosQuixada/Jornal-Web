@@ -14,6 +14,7 @@
 	<a href="mostrarUsuarios">Cadastrar Jornalista</a>
 	<a href="cadastrarSecaoFormulario">Cadastrar Seção</a>
 	<a href="cadastrarClassificadoFormulario">Cadastrar Classificado</a>
+	<a href="mostrarClassificado">Classificado</a>
 	<a href="mostrarSecao">Cadastrar Noticia</a><br/>
 	<c:forEach var="noticia" items="${noticias}">
 		<a href="mostrarNoticia?id_noticia=${noticia.id_noticia}"><h2>${noticia.titulo_noticia}</h2></a>

@@ -7,8 +7,8 @@
     <persistence-unit name="teste_aula" >
        	<provider>org.hibernate.ejb.HibernatePersistence</provider>
         <class>br.carlos.model.Usuario</class>
+        <class>br.carlos.model.Classificado</class>
          
- 
         <properties>
 			<!-- propriedades do hibernate -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
