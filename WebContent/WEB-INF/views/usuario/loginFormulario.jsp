@@ -11,11 +11,11 @@
 	<form action="login" method="post">
 		Login:<input type="text" placeholder="Login" name="login"/><br/>
 		Senha:<input type="password" placeholder="*****" name="senha"/><br/>
-		Tipo de Conta:<br/>
-		<!-- 
-		<input type="radio" name="id_papel" value="1"/>Editor<br/>
-		<input type="radio" name="id_papel" value="2">Jornalista<br/>
-		<input type="radio" name="id_papel" value="3">Leitor<br/> -->
+		<!--Tipo de Conta:<br/>-->
+
+		<!--<input type="radio" name="status" value="1"/>Editor<br/>
+		<input type="radio" name="status" value="2">Jornalista<br/>
+		<input type="radio" name="status" value="3">Leitor<br/>-->
 		<input type="submit" value="Logar"/>
 	</form>
 </body>

@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity(name="usuario")
 public class Usuario {
@@ -24,9 +25,10 @@ public class Usuario {
 	private String email;
 	private String login;
 	private String senha;
+	@Transient
 	private Long status;
 	
-	@OneToMany(mappedBy="editor",targetEntity=Classificado.class,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="usuario_oferta",targetEntity=Classificado.class,fetch=FetchType.EAGER)
 	private Collection<Classificado> classificados;
 	
 	@OneToMany(mappedBy="jornalista",targetEntity=Noticia.class,fetch=FetchType.EAGER)

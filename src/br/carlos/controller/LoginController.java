@@ -36,17 +36,15 @@ public class LoginController {
 	@Qualifier("seguranca")
 	private Seguranca seguranca;
 	
-	//PEGAR TODAS AS NOTICIAS PARA MOSTRAR NA PAGINA PRINCIPAL
-
 	@RequestMapping("/loginFormulario")
 	public String loginFormulario() {
 		return "usuario/loginFormulario";
 	}
 
 	@RequestMapping("/login")
-	public String login(HttpSession session, Usuario usu,Model model) {
+	public String login(HttpSession session,Usuario usu,Model model) {
 		List<Noticia> noticias = nDAO.listarNoticia();
-			
+		
 		Usuario ref = uDAO.recuperarUsuario(usu.getLogin());
 		String senha_crip = seguranca.criptografar(usu.getSenha());
 		usu.setSenha(senha_crip);
