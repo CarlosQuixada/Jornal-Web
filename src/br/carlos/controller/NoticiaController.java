@@ -59,7 +59,14 @@ public class NoticiaController {
 		notic.setJornalista(jorn);
 		notic.setSecao(secao);
 		nDAO.inserirNoticia(notic);
-		return "redirect:mostrarSecao";
+		
+		List<Noticia> noticias = nDAO.listarNoticia();
+		List<Secao> secoes = sDAO.listarSecao();
+		
+		model.addAttribute("noticias",noticias);
+		model.addAttribute("secoes",secoes);
+		
+		return "paginaPrincipal";
 	}
 	
 	@RequestMapping("/mostrarNoticia")
