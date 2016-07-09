@@ -15,7 +15,8 @@
 	<a href="cadastrarSecaoFormulario">Cadastrar Seção</a>
 	<a href="cadastrarClassificadoFormulario">Cadastrar Classificado</a>
 	<a href="mostrarClassificado">Classificado</a>
-	<a href="mostrarSecao">Cadastrar Noticia</a><br/>
+	<a href="mostrarSecao">Cadastrar Noticia</a>
+	<a href="listarNoticiaEditor">Apagar Noticia Editor</a><br/>
 	<c:forEach var="noticia" items="${noticias}">
 		<a href="mostrarNoticia?id_noticia=${noticia.id_noticia}"><h2>${noticia.titulo_noticia}</h2></a>
 		${noticia.subtitulo_noticia}

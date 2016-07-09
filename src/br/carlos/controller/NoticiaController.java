@@ -66,5 +66,24 @@ public class NoticiaController {
 			}
 		}
 		return "redirect:paginaPrincipal";
-	}	
+	}
+	
+	@RequestMapping("/listarNoticiaEditor")
+	public String listarNoticiaEditor(Model model){
+		List<Noticia> noticias = nDAO.listarNoticia();
+		model.addAttribute("noticias",noticias);
+		return"noticia/apagarNoticiaEditor";
+	}
+	
+	@RequestMapping("/apagarNoticiaEditor")
+	public String apagarNoticiaEditor(Long id_noticia,Model model){
+		List<Comentario> comentarios = cDAO.listarComentario(id_noticia);
+		for(Comentario c : comentarios){
+			cDAO.apagarComentario(c.getId_comentario());
+		}
+		nDAO.apagarNoticia(id_noticia);
+		List<Noticia> noticias = nDAO.listarNoticia();
+		model.addAttribute("noticias",noticias);
+		return"noticia/apagarNoticiaEditor";
+	}
 }
