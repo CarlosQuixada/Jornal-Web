@@ -2,6 +2,8 @@ package br.carlos.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -33,7 +35,11 @@ public class ComentarioController {
 	private ComentarioDAO cDAO;
 	
 	@RequestMapping("/inserirComentario")
-	public String inserirComentario(Comentario comentario,Model model){
+	public String inserirComentario(Comentario comentario,Model model,HttpSession session){
+		if(session.getAttribute("usuario_logado") == null){
+			return"usuario/loginFormulario";
+		}
+		
 		
 		if(comentario.getTexto_comentario().isEmpty()){
 			List<Comentario>comentarios = cDAO.listarComentario(comentario.getId_noticia());
