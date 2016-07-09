@@ -38,6 +38,10 @@ public class UsuarioController {
 	
 	@RequestMapping("/inserirUsuario")
 	public String inserirUsuario(Usuario usu){
+		if(usu.getNome_usuario().isEmpty() || usu.getEmail().isEmpty() || usu.getLogin().isEmpty() || usu.getSenha().isEmpty()){
+			return "redirect:inserirUsuarioFormulario";
+		}
+		
 		for(Usuario u : uDAO.listarUsuarios()){
 			if(u.getLogin().equals(usu.getLogin())){
 				return "redirect:inserirUsuarioFormulario";
