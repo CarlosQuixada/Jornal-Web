@@ -87,4 +87,9 @@ public class UsuarioController {
 		return"usuario/jornalistaCadastradoOK";
 	}
 	
+	@RequestMapping("/gerenciarFuncao")
+	public String gerenciarFuncao(){
+		return"usuario/gerenciarFuncao";
+	}
+	
 }
