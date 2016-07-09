@@ -75,6 +75,17 @@ public class NoticiaController {
 		return "redirect:paginaPrincipal";
 	}
 	
+	@RequestMapping("/listarNoticiaSecao")
+	public String listarNoticiaSecao(Long id_secao,Model model){
+		List<Noticia> noticias = nDAO.listarNoticiaSecao(id_secao);
+		List<Secao> secoes = sDAO.listarSecao();
+		
+		model.addAttribute("noticias",noticias);
+		model.addAttribute("secoes",secoes);
+		
+		return"paginaPrincipal";
+	}
+	
 	@RequestMapping("/listarNoticiaEditor")
 	public String listarNoticiaEditor(Model model){
 		List<Noticia> noticias = nDAO.listarNoticia();

@@ -36,6 +36,13 @@ public class NoticiaDAO {
 		return noticias;
 	}
 	
+	public List<Noticia> listarNoticiaSecao(Long id_secao){
+		String hql = "select n from noticia as n where n.id_secao = :var_id_secao";
+		Query query = manager.createQuery(hql);
+		List<Noticia> noticias = query.setParameter("var_id_secao", id_secao).getResultList();
+		return noticias;
+	}
+	
 	public void apagarNoticia(Long id){
 		Noticia notic = this.recuperarNoticia(id);
 		manager.remove(notic);
