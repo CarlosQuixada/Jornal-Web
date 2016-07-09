@@ -18,14 +18,9 @@ public class RootController {
 	private NoticiaDAO nDAO;
 	
 	@RequestMapping("/")
-	public String home(Model model){
+	public String paginaPrincipal(Model model){
 		List<Noticia> noticias = nDAO.listarNoticia();
 		model.addAttribute("noticias",noticias);
-		return"paginaPrincipal";
-	}
-	
-	@RequestMapping("/home")
-	public String home2(){
 		return"paginaPrincipal";
 	}
 }

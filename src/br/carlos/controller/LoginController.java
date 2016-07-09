@@ -60,8 +60,10 @@ public class LoginController {
 	}
 
 	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session,Model model) {
 		session.invalidate();
-		return "home";
+		List<Noticia> noticias = nDAO.listarNoticia();
+		model.addAttribute("noticias",noticias);
+		return "paginaPrincipal";
 	}
 }

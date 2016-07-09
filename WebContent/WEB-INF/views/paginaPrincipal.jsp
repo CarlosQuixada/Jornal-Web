@@ -10,6 +10,8 @@
 <body>
 	<h2>Pagina Principal</h2>
 	<b>Bem-Vindo ${usuario_logado.nome_usuario}</b>
+	<a href="loginFormulario">Logar</a>
+	<a href="inserirUsuarioFormulario">Cadastrar-se</a>
 	<a href="logout">Logout</a><br/><br/>
 	<a href="mostrarUsuarios">Cadastrar Jornalista</a>
 	<a href="cadastrarSecaoFormulario">Cadastrar Seção</a>
