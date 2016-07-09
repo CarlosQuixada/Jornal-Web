@@ -23,4 +23,11 @@ public class RootController {
 		model.addAttribute("noticias",noticias);
 		return"paginaPrincipal";
 	}
+	
+	@RequestMapping("/home")
+	public String home(Model model){
+		List<Noticia> noticias = nDAO.listarNoticia();
+		model.addAttribute("noticias",noticias);
+		return"paginaPrincipal";
+	}
 }

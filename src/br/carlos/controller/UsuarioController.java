@@ -37,7 +37,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/inserirUsuario")
-	public String inserirUsuario(Usuario usu){
+	public String inserirUsuario(Usuario usu,Model model){
 		if(usu.getNome_usuario().isEmpty() || usu.getEmail().isEmpty() || usu.getLogin().isEmpty() || usu.getSenha().isEmpty()){
 			return "redirect:inserirUsuarioFormulario";
 		}
@@ -55,7 +55,8 @@ public class UsuarioController {
 		usu.setSenha(senha_crip);
 		usu.setPapeis(papeis);
 		uDAO.inserirUsuario(usu);
-		return "inseridoOK";
+		model.addAttribute("usuario",usu);
+		return "usuario/usuarioInseridoOK";
 	}
 	
 	@RequestMapping("/mostrarUsuarios")
