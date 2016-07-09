@@ -2,6 +2,8 @@ package br.carlos.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -66,5 +68,43 @@ public class NoticiaController {
 			}
 		}
 		return "redirect:paginaPrincipal";
-	}	
+	}
+	
+	@RequestMapping("/listarNoticiaEditor")
+	public String listarNoticiaEditor(Model model){
+		List<Noticia> noticias = nDAO.listarNoticia();
+		model.addAttribute("noticias",noticias);
+		return"noticia/apagarNoticiaEditor";
+	}
+	
+	@RequestMapping("/listarNoticiaJornalista")
+	public String listarNoticiaJornalista(Long id_usuario,Model model){
+		List<Noticia> noticias = nDAO.listarNoticiaJornalista(id_usuario);
+		model.addAttribute("noticias",noticias);
+		return"noticia/apagarNoticiaJornalista";
+	}
+	@RequestMapping("/apagarNoticiaJornalista")
+	public String apagarNoticiaJornalista(Long id_noticia,HttpSession session,Model model) {
+		List<Comentario> comentarios =cDAO.listarComentario(id_noticia);
+		for(Comentario c : comentarios){
+			cDAO.apagarComentario(c.getId_comentario());
+		}
+		nDAO.apagarNoticia(id_noticia);
+		Usuario usu = (Usuario) session.getAttribute("usuario_logado");
+		List<Noticia> noticias = nDAO.listarNoticiaJornalista(usu.getId_usuario());
+		model.addAttribute("noticias",noticias);
+		return"noticia/apagarNoticiaJornalista";
+	}
+	
+	@RequestMapping("/apagarNoticiaEditor")
+	public String apagarNoticiaEditor(Long id_noticia,Model model){
+		List<Comentario> comentarios = cDAO.listarComentario(id_noticia);
+		for(Comentario c : comentarios){
+			cDAO.apagarComentario(c.getId_comentario());
+		}
+		nDAO.apagarNoticia(id_noticia);
+		List<Noticia> noticias = nDAO.listarNoticia();
+		model.addAttribute("noticias",noticias);
+		return"noticia/apagarNoticiaEditor";
+	}
 }

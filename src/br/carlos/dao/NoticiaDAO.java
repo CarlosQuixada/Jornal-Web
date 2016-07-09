@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -26,6 +27,13 @@ public class NoticiaDAO {
 	public List<Noticia> listarNoticia(){
 		String hql = "select n from noticia as n";
 		return manager.createQuery(hql,Noticia.class).getResultList();
+	}
+	
+	public List<Noticia> listarNoticiaJornalista(Long id_usuario){
+		String hql = "select n from noticia as n where n.id_jornalista = :var_id_jornalista";
+		Query query = manager.createQuery(hql);
+		List<Noticia> noticias = query.setParameter("var_id_jornalista", id_usuario).getResultList();
+		return noticias;
 	}
 	
 	public void apagarNoticia(Long id){
