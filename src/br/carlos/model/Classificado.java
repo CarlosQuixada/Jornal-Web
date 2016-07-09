@@ -33,11 +33,11 @@ public class Classificado {
 	private Date data_oferta;
 	
 	@ManyToOne
-	@JoinColumn(name="EDIT_ID",referencedColumnName="USU_ID")
-	private Usuario editor;
+	@JoinColumn(name="USU_ID",referencedColumnName="USU_ID")
+	private Usuario usuario_oferta;
 	
-	@Column(name="EDIT_ID",insertable=false,updatable=false)
-	private Long id_editor;
+	@Column(name="USU_ID",insertable=false,updatable=false)
+	private Long id_usuario_oferta;
 	
 	public Long getId_classificado() {
 		return id_classificado;
@@ -81,17 +81,17 @@ public class Classificado {
 	public void setData_oferta(Date data_oferta) {
 		this.data_oferta = data_oferta;
 	}
-	public Usuario getEditor() {
-		return editor;
+	public Usuario getUsuario_oferta() {
+		return usuario_oferta;
 	}
-	public void setEditor(Usuario editor) {
-		this.editor = editor;
+	public void setUsuario_oferta(Usuario usuario_oferta) {
+		this.usuario_oferta = usuario_oferta;
 	}
-	public Long getId_editor() {
-		return id_editor;
+	public Long getId_usuario_oferta() {
+		return id_usuario_oferta;
 	}
-	public void setId_editor(Long id_editor) {
-		this.id_editor = id_editor;
+	public void setId_usuario_oferta(Long id_usuario_oferta) {
+		this.id_usuario_oferta = id_usuario_oferta;
 	}
 	
 	

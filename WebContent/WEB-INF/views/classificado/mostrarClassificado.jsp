@@ -8,14 +8,27 @@
 <title>Classificados</title>
 </head>
 <body>
-	<h2>Classificados</h2>
+	<h1>Classificados</h1>
 	<c:forEach var="classificado" items="${classificados}">
 		<hr  width="60%" align="left"/><br/>
-		<h4>${classificado.titulo_classificado}</h4>
-		<p>Preço: ${classificado.preco}</p>
-		<p>Telefone: ${classificado.telefone}</p>
+		<h2>${classificado.titulo_classificado}</h2>
 		<p>Descrição:</p>
 		<p>${classificado.texto_classificado}</p><br/>
+		
+		<p>Preço: ${classificado.preco}</p>
+		<p>Telefone: ${classificado.telefone}</p>
+		<b><p>Melhor Oferta: ${classificado.melhor_preco}</p></b>
+		<b><p>Autor da Oferta: ${classificado.usuario_oferta.nome_usuario}</p></b><br/>
+		
+		
+		<h4>Inserir Oferta</h4>
+		<form action="realizarOferta" method="post">
+		<input type="hidden" name="id_usuario_oferta" value="${usuario_logado.id_usuario}" />
+		<input type="hidden" name="id_classificado" value="${classificado.id_classificado}"/>
+		<input type="text" name="valor" />
+		<input type="submit" value="Realizar Oferta">
+		</form>
+		<hr  width="60%" align="left"/><br/>
 	</c:forEach>
 </body>
 </html>
