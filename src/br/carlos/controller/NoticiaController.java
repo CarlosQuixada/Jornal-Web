@@ -48,7 +48,11 @@ public class NoticiaController {
 	}
 	
 	@RequestMapping("/cadastrarNoticia")
-	public String cadastrarNoticia(Noticia notic,@RequestParam(value="id_secao",required=false)Long id_secao,@RequestParam(value="id_usuario",required=false)Long id_usuario,Model model){
+	public String cadastrarNoticia(Noticia notic,@RequestParam(value="id_secao",required=false)Long id_secao,@RequestParam(value="id_usuario",required=false)Long id_usuario,Model model,HttpSession session){
+		if(session.getAttribute("usuario_logado") == null){
+			return"usuario/loginFormulario";
+		}
+		
 		if(notic.getTitulo_noticia().isEmpty() || notic.getSubtitulo_noticia().isEmpty() || notic.getTexto_noticia().isEmpty()){
 			model.addAttribute("id_secao",id_secao);
 			return"noticia/cadastrarNoticiaFormulario";
@@ -67,6 +71,7 @@ public class NoticiaController {
 		model.addAttribute("secoes",secoes);
 		
 		return "paginaPrincipal";
+		
 	}
 	
 	@RequestMapping("/mostrarNoticia")
