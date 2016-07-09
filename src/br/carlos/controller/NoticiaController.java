@@ -48,7 +48,12 @@ public class NoticiaController {
 	}
 	
 	@RequestMapping("/cadastrarNoticia")
-	public String cadastrarNoticia(Noticia notic,@RequestParam(value="id_secao",required=false)Long id_secao,@RequestParam(value="id_usuario",required=false)Long id_usuario){
+	public String cadastrarNoticia(Noticia notic,@RequestParam(value="id_secao",required=false)Long id_secao,@RequestParam(value="id_usuario",required=false)Long id_usuario,Model model){
+		if(notic.getTitulo_noticia().isEmpty() || notic.getSubtitulo_noticia().isEmpty() || notic.getTexto_noticia().isEmpty()){
+			model.addAttribute("id_secao",id_secao);
+			return"noticia/cadastrarNoticiaFormulario";
+		}
+		
 		Usuario jorn = uDAO.recuperarUsuario(id_usuario);
 		Secao secao = sDAO.recuperarSecao(id_secao);
 		notic.setJornalista(jorn);
