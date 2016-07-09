@@ -17,6 +17,7 @@
 	<a href="mostrarClassificado">Classificado</a>
 	<a href="mostrarSecao">Cadastrar Noticia</a>
 	<a href="listarNoticiaEditor">Apagar Noticia Editor</a><br/>
+	<a href="listarNoticiaJornalista?id_usuario=${usuario_logado.id_usuario}">Apagar Noticia Jornalista</a>
 	<c:forEach var="noticia" items="${noticias}">
 		<a href="mostrarNoticia?id_noticia=${noticia.id_noticia}"><h2>${noticia.titulo_noticia}</h2></a>
 		${noticia.subtitulo_noticia}
