@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h2>Jornalista ${usuario_jorn.nome_usuario} Cadastrado</h2>
+	<a href="home">Voltar</a>
 </body>
 </html>

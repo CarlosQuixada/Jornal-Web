@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h1>${secao.titulo_secao} Inserido com Sucesso!!</h1>
+	<a href="home">Voltar</a>
 </body>
 </html>

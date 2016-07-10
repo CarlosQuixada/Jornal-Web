@@ -18,6 +18,7 @@
 		<a href="listarNoticiaSecao?id_secao=${secao.id_secao}">${secao.titulo_secao}</a>
 	</c:forEach>
 	<a href="gerenciarFuncao">Gerenciar Funções</a>
+	<a href="mostrarClassificado">Classificados</a>
 	
 	<c:forEach var="noticia" items="${noticias}">
 		<a href="mostrarNoticia?id_noticia=${noticia.id_noticia}"><h2>${noticia.titulo_noticia}</h2></a>

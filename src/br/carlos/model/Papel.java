@@ -18,7 +18,7 @@ public class Papel {
 	private Long id_papel;
 	private String papel;
 	
-	@ManyToMany(mappedBy="papeis",fetch=FetchType.LAZY)
+	@ManyToMany(mappedBy="papeis",fetch=FetchType.EAGER)
 	private List<Usuario> usuarios;
 	
 	public Long getId_papel() {
