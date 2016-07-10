@@ -28,5 +28,6 @@
 			<p>${comentario.texto_comentario}</p>
 			<hr  width="60%" align="left"/><br/>
 		</c:forEach>
+		<a href="home">Voltar</a>
 </body>
 </html>

@@ -48,4 +48,9 @@ public class UsuarioDAO {
 		return null;
 	}
 	
+	/*public List<Usuario> listarUsuarioNaoJornalista(){
+		String hql = "select u from usuario as u where u.id_usuario = (select usu.USU_ID from papel_usuario as usu where usu.USU_ID = 2)";
+		return manager.createQuery(hql,Usuario.class).getResultList();
+	}*/
+	
 }

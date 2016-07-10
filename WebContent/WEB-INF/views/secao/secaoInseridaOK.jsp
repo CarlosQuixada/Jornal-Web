@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Jornalista Inserido</title>
+<title>Inserida Seção</title>
 </head>
 <body>
-	<h2>Jornalista ${usuario_jorn.nome_usuario} Cadastrado</h2>
+	<h1>${secao.titulo_secao} Inserido com Sucesso!!</h1>
 	<a href="home">Voltar</a>
 </body>
 </html>
