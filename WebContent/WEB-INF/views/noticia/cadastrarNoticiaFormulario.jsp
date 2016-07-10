@@ -8,11 +8,12 @@
 </head>
 <body>
 	<h2>Cadastrar Noticia - ${usuario_logado.nome_usuario}</h2>
-	<form action="cadastrarNoticia" method="post">
+	<form action="cadastrarNoticia" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="id_secao" value="${id_secao}"/>
 		<input type="hidden" name="id_usuario" value="${usuario_logado.id_usuario}"/>
 		Titulo:<input type="text" name="titulo_noticia"/><br>
 		Subtitulo:<input type="text" name="subtitulo_noticia"/><br/>
+		Imagem:<input type="file" name="image"/><br/>
 		Texto:<br/><textarea rows="4" cols="50" name="texto_noticia"></textarea><br/>
 		<input type="submit" value="Cadastrar"/>
 	</form>

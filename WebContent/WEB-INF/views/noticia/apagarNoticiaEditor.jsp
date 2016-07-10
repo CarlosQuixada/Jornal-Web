@@ -25,5 +25,6 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<a href="home">Voltar</a>
 </body>
 </html>
