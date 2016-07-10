@@ -10,6 +10,7 @@
 <body>
 	<h5>${noticia.secao.titulo_secao}</h5>
 	<h5>Data da Noticia</h5>
+	<img src="<c:url value="/resources/images/${noticia.titulo_noticia}.png"/>"/><br/>
 	<h1>${noticia.titulo_noticia}</h1>
 	${noticia.subtitulo_noticia}
 	 <h6>Autor:${noticia.jornalista.nome_usuario}</h6>
