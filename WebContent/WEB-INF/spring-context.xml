@@ -18,6 +18,12 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<context:component-scan base-package="br.carlos.controller" />
 	<mvc:annotation-driven />
 	
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="500000000000000"/>
+	</bean>
+	
 	<bean id="usuarioDAO" class="br.carlos.dao.UsuarioDAO" />
 	<bean id="papelDAO" class="br.carlos.dao.PapelDAO" />
 	<bean id="noticiaDAO" class="br.carlos.dao.NoticiaDAO"/>

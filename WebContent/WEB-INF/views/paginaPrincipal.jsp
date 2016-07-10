@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h2>Pagina Principal</h2>
+	<img src="<c:url value="/resources/images/${usuario_logado.login}.png"/>"/><br/>
 	<b>Bem-Vindo ${usuario_logado.nome_usuario}</b>
 	<a href="loginFormulario">Logar</a>
 	<a href="inserirUsuarioFormulario">Cadastrar-se</a>

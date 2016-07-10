@@ -8,11 +8,12 @@
 </head>
 <body>
 	<h2>Cadastrar Usuário</h2><br/>
-	<form action="inserirUsuario" method="post">
+	<form action="inserirUsuario" method="post" enctype="multipart/form-data">
 		Nome:<input type="text" name="nome_usuario"/><br/>
 		Email:<input type="text" name="email"/><br/>
 		Login:<input type="text" name="login"/><br/>
 		Senha:<input type="password" name="senha"/><br/>
+		Imagem:<input type="file" name="image"/><br/>
 		<input type="submit" value="ENVIAR"/>
 	</form>
 </body>
