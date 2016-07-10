@@ -48,13 +48,30 @@ public class NoticiaController {
 	}
 	
 	@RequestMapping("/cadastrarNoticia")
-	public String cadastrarNoticia(Noticia notic,@RequestParam(value="id_secao",required=false)Long id_secao,@RequestParam(value="id_usuario",required=false)Long id_usuario){
+	public String cadastrarNoticia(Noticia notic,@RequestParam(value="id_secao",required=false)Long id_secao,@RequestParam(value="id_usuario",required=false)Long id_usuario,Model model,HttpSession session){
+		if(session.getAttribute("usuario_logado") == null){
+			return"usuario/loginFormulario";
+		}
+		
+		if(notic.getTitulo_noticia().isEmpty() || notic.getSubtitulo_noticia().isEmpty() || notic.getTexto_noticia().isEmpty()){
+			model.addAttribute("id_secao",id_secao);
+			return"noticia/cadastrarNoticiaFormulario";
+		}
+		
 		Usuario jorn = uDAO.recuperarUsuario(id_usuario);
 		Secao secao = sDAO.recuperarSecao(id_secao);
 		notic.setJornalista(jorn);
 		notic.setSecao(secao);
 		nDAO.inserirNoticia(notic);
-		return "redirect:mostrarSecao";
+		
+		List<Noticia> noticias = nDAO.listarNoticia();
+		List<Secao> secoes = sDAO.listarSecao();
+		
+		model.addAttribute("noticias",noticias);
+		model.addAttribute("secoes",secoes);
+		
+		return "paginaPrincipal";
+		
 	}
 	
 	@RequestMapping("/mostrarNoticia")
@@ -68,6 +85,17 @@ public class NoticiaController {
 			}
 		}
 		return "redirect:paginaPrincipal";
+	}
+	
+	@RequestMapping("/listarNoticiaSecao")
+	public String listarNoticiaSecao(Long id_secao,Model model){
+		List<Noticia> noticias = nDAO.listarNoticiaSecao(id_secao);
+		List<Secao> secoes = sDAO.listarSecao();
+		
+		model.addAttribute("noticias",noticias);
+		model.addAttribute("secoes",secoes);
+		
+		return"paginaPrincipal";
 	}
 	
 	@RequestMapping("/listarNoticiaEditor")

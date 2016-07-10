@@ -3,18 +3,23 @@ package br.carlos.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.carlos.dao.PapelDAO;
 import br.carlos.dao.UsuarioDAO;
 import br.carlos.model.Papel;
 import br.carlos.model.Usuario;
 import br.carlos.security.Seguranca;
+import br.carlos.util.FileUtil;
 
 @Transactional
 @Controller
@@ -28,6 +33,9 @@ public class UsuarioController {
 	private PapelDAO pDAO;
 	
 	@Autowired
+	private ServletContext servletContext;
+	
+	@Autowired
 	@Qualifier("seguranca")
 	private Seguranca seguranca;
 	
@@ -37,12 +45,22 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/inserirUsuario")
-	public String inserirUsuario(Usuario usu){
+	public String inserirUsuario(Usuario usu,Model model,@RequestParam(value="image",required=false)MultipartFile image){
+		if(usu.getNome_usuario().isEmpty() || usu.getEmail().isEmpty() || usu.getLogin().isEmpty() || usu.getSenha().isEmpty()){
+			return "redirect:inserirUsuarioFormulario";
+		}
+		
 		for(Usuario u : uDAO.listarUsuarios()){
 			if(u.getLogin().equals(usu.getLogin())){
 				return "redirect:inserirUsuarioFormulario";
 			}
 		}
+		
+		if(image != null && !image.isEmpty()){
+			String path = servletContext.getRealPath("/")+"resources/images/"+usu.getLogin()+".png";
+			FileUtil.saveFile(path, image);
+		}
+		
 		Papel papel_leitor = pDAO.recuperarPapel(3L);
 		List<Papel> papeis = new ArrayList<>();
 		papeis.add(papel_leitor);
@@ -51,7 +69,8 @@ public class UsuarioController {
 		usu.setSenha(senha_crip);
 		usu.setPapeis(papeis);
 		uDAO.inserirUsuario(usu);
-		return "inseridoOK";
+		model.addAttribute("usuario",usu);
+		return "usuario/usuarioInseridoOK";
 	}
 	
 	@RequestMapping("/mostrarUsuarios")
@@ -80,6 +99,11 @@ public class UsuarioController {
 		model.addAttribute("usuario_jorn",usuario);
 		
 		return"usuario/jornalistaCadastradoOK";
+	}
+	
+	@RequestMapping("/gerenciarFuncao")
+	public String gerenciarFuncao(){
+		return"usuario/gerenciarFuncao";
 	}
 	
 }

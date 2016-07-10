@@ -26,9 +26,10 @@ public class SecaoController {
 	}
 	
 	@RequestMapping("/cadastrarSecao")
-	public String cadastrarSecao(Secao secao){
+	public String cadastrarSecao(Secao secao,Model model){
 		sDAO.inserirSecao(secao);
-		return"inseridoOK";
+		model.addAttribute("secao",secao);
+		return"secao/secaoInseridaOK";
 	}
 	
 	@RequestMapping("/mostrarSecao")

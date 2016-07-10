@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.carlos.dao.NoticiaDAO;
 import br.carlos.dao.PapelDAO;
+import br.carlos.dao.SecaoDAO;
 import br.carlos.dao.UsuarioDAO;
 import br.carlos.model.Noticia;
 import br.carlos.model.Papel;
+import br.carlos.model.Secao;
 import br.carlos.model.Usuario;
 import br.carlos.security.Seguranca;
 import sun.rmi.server.UnicastRef;
@@ -31,6 +33,10 @@ public class LoginController {
 	@Autowired
 	@Qualifier("noticiaDAO")
 	private NoticiaDAO nDAO;
+	
+	@Autowired
+	@Qualifier("secaoDAO")
+	private SecaoDAO sDAO;
 
 	@Autowired
 	@Qualifier("seguranca")
@@ -44,6 +50,7 @@ public class LoginController {
 	@RequestMapping("/login")
 	public String login(HttpSession session,Usuario usu,Model model) {
 		List<Noticia> noticias = nDAO.listarNoticia();
+		List<Secao> secoes = sDAO.listarSecao();
 		
 		Usuario ref = uDAO.recuperarUsuario(usu.getLogin());
 		String senha_crip = seguranca.criptografar(usu.getSenha());
@@ -52,6 +59,7 @@ public class LoginController {
 		if (ref != null) {
 			if (ref.getSenha().equals(usu.getSenha())) {
 				model.addAttribute("noticias",noticias);
+				model.addAttribute("secoes",secoes);
 				session.setAttribute("usuario_logado", ref);
 				return "paginaPrincipal";
 			}
@@ -60,8 +68,10 @@ public class LoginController {
 	}
 
 	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session,Model model) {
 		session.invalidate();
-		return "home";
+		List<Noticia> noticias = nDAO.listarNoticia();
+		model.addAttribute("noticias",noticias);
+		return "paginaPrincipal";
 	}
 }
