@@ -18,30 +18,30 @@ public class RootController {
 	@Autowired
 	@Qualifier("noticiaDAO")
 	private NoticiaDAO nDAO;
-	
+
 	@Autowired
 	@Qualifier("secaoDAO")
 	private SecaoDAO sDAO;
-	
+
 	@RequestMapping("/")
-	public String paginaPrincipal(Model model){
+	public String paginaPrincipal(Model model) {
 		List<Noticia> noticias = nDAO.listarNoticia();
 		List<Secao> secoes = sDAO.listarSecao();
-		
-		model.addAttribute("noticias",noticias);
-		model.addAttribute("secoes",secoes);
-		
-		return"paginaPrincipal";
+
+		model.addAttribute("noticias", noticias);
+		model.addAttribute("secoes", secoes);
+
+		return "paginaPrincipal";
 	}
-	
+
 	@RequestMapping("/home")
-	public String home(Model model){
+	public String home(Model model) {
 		List<Noticia> noticias = nDAO.listarNoticia();
 		List<Secao> secoes = sDAO.listarSecao();
-		
-		model.addAttribute("noticias",noticias);
-		model.addAttribute("secoes",secoes);
-		
-		return"paginaPrincipal";
+
+		model.addAttribute("noticias", noticias);
+		model.addAttribute("secoes", secoes);
+
+		return "paginaPrincipal";
 	}
 }

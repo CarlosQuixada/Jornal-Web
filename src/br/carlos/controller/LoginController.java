@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.tomcat.util.buf.UDecoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.carlos.dao.NoticiaDAO;
-import br.carlos.dao.PapelDAO;
 import br.carlos.dao.SecaoDAO;
 import br.carlos.dao.UsuarioDAO;
 import br.carlos.model.Noticia;
@@ -21,7 +19,6 @@ import br.carlos.model.Papel;
 import br.carlos.model.Secao;
 import br.carlos.model.Usuario;
 import br.carlos.security.Seguranca;
-import sun.rmi.server.UnicastRef;
 
 @Controller
 public class LoginController {
@@ -29,11 +26,11 @@ public class LoginController {
 	@Autowired
 	@Qualifier("usuarioDAO")
 	private UsuarioDAO uDAO;
-	
+
 	@Autowired
 	@Qualifier("noticiaDAO")
 	private NoticiaDAO nDAO;
-	
+
 	@Autowired
 	@Qualifier("secaoDAO")
 	private SecaoDAO sDAO;
@@ -41,25 +38,26 @@ public class LoginController {
 	@Autowired
 	@Qualifier("seguranca")
 	private Seguranca seguranca;
-	
+
 	@RequestMapping("/loginFormulario")
 	public String loginFormulario() {
 		return "usuario/loginFormulario";
 	}
 
 	@RequestMapping("/login")
-	public String login(HttpSession session,Usuario usu,Model model) {
+	public String login(HttpSession session, Usuario usu, Model model) {
 		List<Noticia> noticias = nDAO.listarNoticia();
 		List<Secao> secoes = sDAO.listarSecao();
-		
+
 		Usuario ref = uDAO.recuperarUsuario(usu.getLogin());
 		String senha_crip = seguranca.criptografar(usu.getSenha());
 		usu.setSenha(senha_crip);
-
+		
+		
 		if (ref != null) {
 			if (ref.getSenha().equals(usu.getSenha())) {
-				model.addAttribute("noticias",noticias);
-				model.addAttribute("secoes",secoes);
+				model.addAttribute("noticias", noticias);
+				model.addAttribute("secoes", secoes);
 				session.setAttribute("usuario_logado", ref);
 				return "paginaPrincipal";
 			}
@@ -68,10 +66,10 @@ public class LoginController {
 	}
 
 	@RequestMapping("/logout")
-	public String logout(HttpSession session,Model model) {
+	public String logout(HttpSession session, Model model) {
 		session.invalidate();
 		List<Noticia> noticias = nDAO.listarNoticia();
-		model.addAttribute("noticias",noticias);
+		model.addAttribute("noticias", noticias);
 		return "paginaPrincipal";
 	}
 }

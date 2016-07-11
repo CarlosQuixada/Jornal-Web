@@ -11,29 +11,29 @@ import br.carlos.model.Secao;
 
 @Repository
 public class SecaoDAO {
-	
+
 	@PersistenceContext
 	private EntityManager manager;
-	
-	public void inserirSecao(Secao secao){
+
+	public void inserirSecao(Secao secao) {
 		manager.persist(secao);
 	}
-	
-	public void alterarSecao(Secao secao){
+
+	public void alterarSecao(Secao secao) {
 		manager.merge(secao);
 	}
-	
-	public List<Secao> listarSecao(){
+
+	public List<Secao> listarSecao() {
 		String hql = "select s from secao as s";
-		return manager.createQuery(hql,Secao.class).getResultList();
+		return manager.createQuery(hql, Secao.class).getResultList();
 	}
-	
-	public void apagarSecao(Long id){
+
+	public void apagarSecao(Long id) {
 		Secao secao = this.recuperarSecao(id);
 		manager.remove(secao);
 	}
-	
-	public Secao recuperarSecao(Long id){
+
+	public Secao recuperarSecao(Long id) {
 		return manager.find(Secao.class, id);
 	}
 }

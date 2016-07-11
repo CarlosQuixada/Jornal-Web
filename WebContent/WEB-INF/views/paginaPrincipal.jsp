@@ -9,7 +9,6 @@
 </head>
 <body>
 	<h2>Pagina Principal</h2>
-	<img src="<c:url value="/resources/images/${usuario_logado.login}.png"/>"/><br/>
 	<b>Bem-Vindo ${usuario_logado.nome_usuario}</b>
 	<a href="loginFormulario">Logar</a>
 	<a href="inserirUsuarioFormulario">Cadastrar-se</a>
@@ -19,6 +18,7 @@
 		<a href="listarNoticiaSecao?id_secao=${secao.id_secao}">${secao.titulo_secao}</a>
 	</c:forEach>
 	<a href="gerenciarFuncao">Gerenciar Funções</a>
+	<a href="mostrarClassificado">Classificado</a><br/>
 	
 	<c:forEach var="noticia" items="${noticias}">
 		<a href="mostrarNoticia?id_noticia=${noticia.id_noticia}"><h2>${noticia.titulo_noticia}</h2></a>

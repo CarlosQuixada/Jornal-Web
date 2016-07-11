@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/mvc/spring-mvc.xsd
@@ -17,27 +16,33 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<context:component-scan base-package="br.carlos.dao" />
 	<context:component-scan base-package="br.carlos.controller" />
 	<mvc:annotation-driven />
-	
+
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-	
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="500000000000000"/>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="500000000000000" />
 	</bean>
-	
+
+	<mvc:interceptors>
+		<bean class="br.carlos.interceptor.AutorizadorInterceptor" />
+
+	</mvc:interceptors>
+
 	<bean id="usuarioDAO" class="br.carlos.dao.UsuarioDAO" />
 	<bean id="papelDAO" class="br.carlos.dao.PapelDAO" />
-	<bean id="noticiaDAO" class="br.carlos.dao.NoticiaDAO"/>
-	<bean id="secaoDAO" class="br.carlos.dao.SecaoDAO"/>
+	<bean id="noticiaDAO" class="br.carlos.dao.NoticiaDAO" />
+	<bean id="secaoDAO" class="br.carlos.dao.SecaoDAO" />
 	<bean id="comentarioDAO" class="br.carlos.dao.ComentarioDAO" />
-	<bean id="classificadoDAO" class="br.carlos.dao.ClassificadoDAO"/>
+	<bean id="classificadoDAO" class="br.carlos.dao.ClassificadoDAO" />
 	<bean id="seguranca" class="br.carlos.security.Seguranca" />
 
 	<bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost/jornal_ufc" />
+		<property name="url" value="jdbc:mysql://localhost/java_jornal" />
 		<property name="username" value="root" />
 		<property name="password" value="C@rlos95" />
-	</bean> 
+	</bean>
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

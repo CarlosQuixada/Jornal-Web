@@ -15,27 +15,27 @@ import br.carlos.model.Secao;
 @Transactional
 @Controller
 public class SecaoController {
-	
+
 	@Autowired
 	@Qualifier("secaoDAO")
 	private SecaoDAO sDAO;
-	
+
 	@RequestMapping("/cadastrarSecaoFormulario")
-	public String cadastrarSecaoFormulario(){
+	public String cadastrarSecaoFormulario() {
 		return "secao/cadastrarSecaoFormulario";
 	}
-	
+
 	@RequestMapping("/cadastrarSecao")
-	public String cadastrarSecao(Secao secao,Model model){
+	public String cadastrarSecao(Secao secao, Model model) {
 		sDAO.inserirSecao(secao);
-		model.addAttribute("secao",secao);
-		return"secao/secaoInseridaOK";
+		model.addAttribute("secao", secao);
+		return "secao/secaoInseridaOK";
 	}
-	
+
 	@RequestMapping("/mostrarSecao")
-	public String mostrarSecao(Model model){
+	public String mostrarSecao(Model model) {
 		List<Secao> secoes = sDAO.listarSecao();
-		model.addAttribute("secoes",secoes);
+		model.addAttribute("secoes", secoes);
 		return "secao/mostrarSecao";
 	}
 }

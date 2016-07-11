@@ -11,29 +11,29 @@ import br.carlos.model.Papel;
 
 @Repository
 public class PapelDAO {
-	
+
 	@PersistenceContext
 	private EntityManager manager;
-	
-	public void inserirPapel(Papel papel){
+
+	public void inserirPapel(Papel papel) {
 		manager.persist(papel);
 	}
-	
-	public void alterarPapel(Papel papel){
+
+	public void alterarPapel(Papel papel) {
 		manager.merge(papel);
 	}
-	
-	public List<Papel> listarPapel(){
+
+	public List<Papel> listarPapel() {
 		String hql = "select p from papel as p";
-		return manager.createQuery(hql,Papel.class).getResultList();
+		return manager.createQuery(hql, Papel.class).getResultList();
 	}
-	
-	public void apagarPapel(Long id){
+
+	public void apagarPapel(Long id) {
 		Papel papel = this.recuperarPapel(id);
 		manager.remove(papel);
 	}
-	
-	public Papel recuperarPapel(Long id){
+
+	public Papel recuperarPapel(Long id) {
 		return manager.find(Papel.class, id);
 	}
 }

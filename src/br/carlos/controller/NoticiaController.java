@@ -1,5 +1,7 @@
 package br.carlos.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -20,6 +22,7 @@ import br.carlos.dao.SecaoDAO;
 import br.carlos.dao.UsuarioDAO;
 import br.carlos.model.Comentario;
 import br.carlos.model.Noticia;
+import br.carlos.model.Papel;
 import br.carlos.model.Secao;
 import br.carlos.model.Usuario;
 import br.carlos.util.FileUtil;
@@ -39,7 +42,7 @@ public class NoticiaController {
 	@Autowired
 	@Qualifier("secaoDAO")
 	private SecaoDAO sDAO;
-	
+
 	@Autowired
 	private ServletContext servletContext;
 
@@ -58,24 +61,26 @@ public class NoticiaController {
 			@RequestParam(value = "id_usuario", required = false) Long id_usuario, Model model, HttpSession session,
 			@RequestParam(value = "image", required = false) MultipartFile image) {
 		
-		if (session.getAttribute("usuario_logado") == null) {
-			return "usuario/loginFormulario";
-		}
 
 		if (notic.getTitulo_noticia().isEmpty() || notic.getSubtitulo_noticia().isEmpty()
 				|| notic.getTexto_noticia().isEmpty()) {
 			model.addAttribute("id_secao", id_secao);
 			return "noticia/cadastrarNoticiaFormulario";
 		}
-
+		Date data_noticia = new Date();
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		
+		notic.setData_noticia(formato.format(data_noticia));
+		System.out.println(notic.getData_noticia());
+		
 		Usuario jorn = uDAO.recuperarUsuario(id_usuario);
 		Secao secao = sDAO.recuperarSecao(id_secao);
 		notic.setJornalista(jorn);
 		notic.setSecao(secao);
 		nDAO.inserirNoticia(notic);
-		
-		if(image != null && !image.isEmpty()){
-			String path = servletContext.getRealPath("/")+"resources/images/"+notic.getTitulo_noticia()+".png";
+
+		if (image != null && !image.isEmpty()) {
+			String path = servletContext.getRealPath("/") + "resources/images/" + notic.getTitulo_noticia() + ".png";
 			FileUtil.saveFile(path, image);
 		}
 

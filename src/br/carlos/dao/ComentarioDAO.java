@@ -9,7 +9,6 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import br.carlos.model.Comentario;
-import br.carlos.model.Usuario;
 
 @Repository
 public class ComentarioDAO {

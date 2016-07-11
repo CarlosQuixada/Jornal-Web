@@ -12,40 +12,40 @@ import br.carlos.model.Usuario;
 
 @Repository
 public class UsuarioDAO {
-	
+
 	@PersistenceContext
 	private EntityManager manager;
-	
-	public void inserirUsuario(Usuario usu){
+
+	public void inserirUsuario(Usuario usu) {
 		manager.persist(usu);
 	}
-	
-	public void alterarUsuario(Usuario usu){
+
+	public void alterarUsuario(Usuario usu) {
 		manager.merge(usu);
 	}
-	
-	public List<Usuario> listarUsuarios(){
+
+	public List<Usuario> listarUsuarios() {
 		String hql = "select u from usuario as u";
-		return manager.createQuery(hql,Usuario.class).getResultList();
+		return manager.createQuery(hql, Usuario.class).getResultList();
 	}
-	
-	public void apagarUsuario(Long id){
+
+	public void apagarUsuario(Long id) {
 		Usuario usu = this.recuperarUsuario(id);
 		manager.remove(usu);
 	}
-	
-	public Usuario recuperarUsuario(Long id){
+
+	public Usuario recuperarUsuario(Long id) {
 		return manager.find(Usuario.class, id);
 	}
-	
-	public Usuario recuperarUsuario(String login){
+
+	public Usuario recuperarUsuario(String login) {
 		String hql = "select u from usuario as u where u.login = :var_login";
 		Query query = manager.createQuery(hql);
 		List<Usuario> usuarios = query.setParameter("var_login", login).getResultList();
-		if(usuarios.size() != 0){
+		if (usuarios.size() != 0) {
 			return usuarios.get(0);
 		}
 		return null;
 	}
-	
+
 }

@@ -18,8 +18,8 @@
 		<p>Preço: ${classificado.preco}</p>
 		<p>Telefone: ${classificado.telefone}</p>
 		<b><p>Melhor Oferta: ${classificado.melhor_preco}</p></b>
-		<b><p>Autor da Oferta: ${classificado.usuario_oferta.nome_usuario}</p></b><br/>
-		
+		<b><p>Autor da Oferta: ${classificado.usuario_oferta.nome_usuario}</p></b>
+		<b><p>Data Oferta: ${classificado.data_oferta}</p></b><br/>
 		
 		<h4>Inserir Oferta</h4>
 		<form action="realizarOferta" method="post">
@@ -30,5 +30,6 @@
 		</form>
 		<hr  width="60%" align="left"/><br/>
 	</c:forEach>
+	<a href="home">Voltar</a>
 </body>
 </html>

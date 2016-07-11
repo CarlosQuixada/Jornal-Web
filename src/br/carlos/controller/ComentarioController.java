@@ -21,48 +21,43 @@ import br.carlos.model.Usuario;
 @Transactional
 @Controller
 public class ComentarioController {
-	
+
 	@Autowired
 	@Qualifier("usuarioDAO")
 	private UsuarioDAO uDAO;
-	
+
 	@Autowired
 	@Qualifier("noticiaDAO")
 	private NoticiaDAO nDAO;
-	
+
 	@Autowired
 	@Qualifier("comentarioDAO")
 	private ComentarioDAO cDAO;
-	
+
 	@RequestMapping("/inserirComentario")
-	public String inserirComentario(Comentario comentario,Model model,HttpSession session){
-		if(session.getAttribute("usuario_logado") == null){
-			return"usuario/loginFormulario";
-		}
-		
-		
-		if(comentario.getTexto_comentario().isEmpty()){
-			List<Comentario>comentarios = cDAO.listarComentario(comentario.getId_noticia());
+	public String inserirComentario(Comentario comentario, Model model, HttpSession session) {
+		if (comentario.getTexto_comentario().isEmpty()) {
+			List<Comentario> comentarios = cDAO.listarComentario(comentario.getId_noticia());
 			Noticia not = nDAO.recuperarNoticia(comentario.getId_noticia());
-			
-			model.addAttribute("noticia",not);
-			model.addAttribute("comentarios",comentarios);
-			
-			return"noticia/mostrarNoticia";
+
+			model.addAttribute("noticia", not);
+			model.addAttribute("comentarios", comentarios);
+
+			return "noticia/mostrarNoticia";
 		}
-		
+
 		Usuario usu = uDAO.recuperarUsuario(comentario.getId_usuario());
 		Noticia not = nDAO.recuperarNoticia(comentario.getId_noticia());
-		
+
 		comentario.setUsuario(usu);
 		comentario.setNoticia(not);
 		cDAO.inserirComentario(comentario);
-		
-		List<Comentario>comentarios = cDAO.listarComentario(comentario.getId_noticia());
-		
-		model.addAttribute("noticia",not);
-		model.addAttribute("comentarios",comentarios);
-	
-		return"noticia/mostrarNoticia";
+
+		List<Comentario> comentarios = cDAO.listarComentario(comentario.getId_noticia());
+
+		model.addAttribute("noticia", not);
+		model.addAttribute("comentarios", comentarios);
+
+		return "noticia/mostrarNoticia";
 	}
 }
