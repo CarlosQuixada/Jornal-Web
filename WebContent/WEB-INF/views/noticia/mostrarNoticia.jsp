@@ -8,7 +8,7 @@
 <title>${noticia.titulo_noticia}</title>
 <style>
 div {
-	width: 350px;
+	width: 350px ;
 }
 </style>
 

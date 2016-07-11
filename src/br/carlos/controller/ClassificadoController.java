@@ -31,7 +31,7 @@ public class ClassificadoController {
 
 	@Autowired
 	@Qualifier("classificadoDAO")
-	private ClassificadoDAO clDAO;
+private ClassificadoDAO clDAO;
 
 	@Autowired
 	@Qualifier("secaoDAO")
