@@ -21,7 +21,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="500000000000000"/>
+		<property name="maxUploadSize" value="5000000000000000000"/>
 	</bean>
 	
 	<bean id="usuarioDAO" class="br.carlos.dao.UsuarioDAO" />

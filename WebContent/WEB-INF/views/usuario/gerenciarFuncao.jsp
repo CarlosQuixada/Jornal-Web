@@ -11,9 +11,9 @@
 	<a href="mostrarUsuarios">Cadastrar Jornalista</a><br/>
 	<a href="cadastrarSecaoFormulario">Cadastrar Seção</a><br/>
 	<a href="cadastrarClassificadoFormulario">Cadastrar Classificado</a><br/>
-	<a href="mostrarClassificado">Classificado</a><br/>
 	<a href="mostrarSecao">Cadastrar Noticia</a><br/>
 	<a href="listarNoticiaEditor">Apagar Noticia Editor</a><br/>
-	<a href="listarNoticiaJornalista?id_usuario=${usuario_logado.id_usuario}">Apagar Noticia Jornalista</a>
+	<a href="listarNoticiaJornalista?id_usuario=${usuario_logado.id_usuario}">Apagar Noticia Jornalista</a><br/><br/>
+	<a href="home">Voltar</a>
 </body>
 </html>

@@ -37,7 +37,7 @@ public class Usuario {
 	@OneToMany(mappedBy="usuario",targetEntity=Comentario.class,fetch=FetchType.EAGER)
 	private Collection<Comentario> comentarios;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "PAPEL_USUARIO", joinColumns = @JoinColumn(name = "USU_ID", referencedColumnName = "USU_ID"), inverseJoinColumns = @JoinColumn(name = "PAP_ID", referencedColumnName = "PAP_ID"))
 	private List<Papel> papeis;
 	

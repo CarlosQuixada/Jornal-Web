@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.carlos.dao.ClassificadoDAO;
 import br.carlos.dao.NoticiaDAO;
+import br.carlos.dao.SecaoDAO;
 import br.carlos.dao.UsuarioDAO;
 import br.carlos.model.Classificado;
 import br.carlos.model.Noticia;
+import br.carlos.model.Secao;
 import br.carlos.model.Usuario;
 
 @Transactional
@@ -33,6 +35,10 @@ public class ClassificadoController {
 	@Qualifier("usuarioDAO")
 	private UsuarioDAO uDAO;
 	
+	@Autowired
+	@Qualifier("secaoDAO")
+	private SecaoDAO sDAO;
+	
 	@RequestMapping("/cadastrarClassificadoFormulario")
 	public String cadastrarClassificadoFormulario(){
 		return "classificado/cadastrarClassificadoFormulario";
@@ -41,7 +47,11 @@ public class ClassificadoController {
 	@RequestMapping("/cadastrarClassificado")
 	public String cadastrarClassificado(Classificado clas,Model model){
 		List<Noticia> noticias = nDAO.listarNoticia();
+		List<Secao> secoes = sDAO.listarSecao();
+		
 		model.addAttribute("noticias",noticias);
+		model.addAttribute("secoes",secoes);
+		
 		clas.setMelhor_preco(clas.getPreco());
 		clDAO.inserirClassificado(clas);
 		return"paginaPrincipal";

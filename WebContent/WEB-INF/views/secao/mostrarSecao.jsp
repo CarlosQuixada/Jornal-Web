@@ -21,5 +21,6 @@
 		</tr>
 		</c:forEach>
 	</table>
+	<a href="gerenciarFuncao">Voltar</a>
 </body>
 </html>
